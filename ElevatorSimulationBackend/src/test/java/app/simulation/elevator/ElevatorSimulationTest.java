@@ -30,14 +30,15 @@ class ElevatorSimulationTest {
                     elevators.get(0).getRequests().remove(0);
                     return 0;
                 },
-                List.of(e1)
+                List.of(e1),
+                20
         );
     }
 
     @Test
     void registerAndStepBlock1() {
         Thread t1 = new Thread(
-                () -> simulation.register(null)
+                () -> simulation.register(new PickupRequest(2, Direction.UP))
         );
 
         Thread t2 = new Thread(

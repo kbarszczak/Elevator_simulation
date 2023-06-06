@@ -52,7 +52,7 @@ public class ElevatorSimulationController {
             @PathVariable("id") @Min(0) @NotNull Integer id,
             @RequestParam("source") @Min(0) @NotNull Integer source,
             @RequestParam("elevator_id") @Min(0) @NotNull Integer elevatorId,
-            @RequestParam("destination") @Max(500) @NotNull Integer destination
+            @RequestParam("destination") @Min(0) @NotNull Integer destination
     ) {
         return ResponseEntity.ok(simulationService.createElevateRequestById(id, source, elevatorId, destination));
     }
@@ -60,10 +60,11 @@ public class ElevatorSimulationController {
     @PostMapping
     public ResponseEntity<Integer> createSimulation(
             @RequestParam("elevator_count") @Min(1) @Max(16) @NotNull Integer elevatorCount,
+            @RequestParam("floors") @Min(1) @Max(500) @NotNull Integer maxFloors,
             @RequestParam("delay") @Min(0) @NotNull Integer delayMs,
             @RequestParam("system_name") @NotEmpty String systemClassName
     ) throws ReflectiveOperationException {
-        return ResponseEntity.ok(simulationService.createElevatorSimulation(elevatorCount, delayMs, systemClassName));
+        return ResponseEntity.ok(simulationService.createElevatorSimulation(elevatorCount, maxFloors, delayMs, systemClassName));
     }
 
     @ExceptionHandler(ReflectiveOperationException.class)

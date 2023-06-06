@@ -1,0 +1,47 @@
+:root{
+    --main-color-light: #a3b18a;
+    --main-color-dark: #3a5a40;
+    --font-color: #000;
+}
+
+html,
+body{
+    font-family: 'Inter', 'Courier New', 'Serif', serif;
+    font-weight: normal;
+    color: var(--font-color);
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+button, select{
+    background-color: #fff;
+    outline: none;
+    border: none;
+    box-shadow: 0 0 2px #000;
+    padding: 10px 15px;
+    margin-left: 4px;
+    height: 35px;
+    cursor: pointer;
+    text-align: center;
+    transition: .15s all ease-in-out;
+}
+
+button{
+    padding: 10px 20px;
+    width: 100%;
+}
+
+button:hover, select:hover{
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.centered{
+    margin: auto;
+    text-align: center;
+}
+
+.filed{
+    width: 200px;
+    margin: 10px auto;
+}

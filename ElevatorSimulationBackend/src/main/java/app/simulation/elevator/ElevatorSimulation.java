@@ -22,16 +22,18 @@ public class ElevatorSimulation implements Simulation {
     @ToString.Exclude
     private final Semaphore semaphore;
     private final List<Elevator> elevators;
+    private final int floors;
     private ElevatorSystem system;
 
     /**
      * @param system
      * @param elevators
      */
-    public ElevatorSimulation(ElevatorSystem system, List<Elevator> elevators) {
+    public ElevatorSimulation(ElevatorSystem system, List<Elevator> elevators, int floors) {
         this.semaphore = new Semaphore(1);
         this.system = system;
         this.elevators = elevators;
+        this.floors = floors;
     }
 
     /**
@@ -39,6 +41,8 @@ public class ElevatorSimulation implements Simulation {
      */
     public int register(Request request) {
         int result = 0;
+        if(request.getDestination() > floors) throw new IllegalArgumentException(String.format("Cannot go to floor '%d' because the simulation has only '%d' floors", request.getDestination(), floors));
+
         try {
             // block the threads that would like to modify elevators' request list
             semaphore.acquire();

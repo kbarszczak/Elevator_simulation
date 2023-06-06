@@ -26,7 +26,7 @@ public class DefaultElevatorSimulationService implements ElevatorSimulationServi
     }
 
     @Override
-    public Integer createElevatorSimulation(Integer elevatorCount, Integer delayMs, String elevatorSystemClassName)
+    public Integer createElevatorSimulation(Integer elevatorCount, Integer maxFloors, Integer delayMs, String elevatorSystemClassName)
             throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException,
             InstantiationException, IllegalAccessException {
         Class<?> c = Class.forName(elevatorSystemClassName);
@@ -35,7 +35,8 @@ public class DefaultElevatorSimulationService implements ElevatorSimulationServi
         SimulationRunner runner = new SimulationRunner(
                 new ElevatorSimulation(
                         system,
-                        IntStream.range(0, elevatorCount).mapToObj(x -> new Elevator()).collect(Collectors.toCollection(LinkedList::new))
+                        IntStream.range(0, elevatorCount).mapToObj(x -> new Elevator()).collect(Collectors.toCollection(LinkedList::new)),
+                        maxFloors
                 ),
                 delayMs
         );

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ElevatorSimulationService {
 
-    Integer createElevatorSimulation(Integer elevatorCount, Integer delayMs, String elevatorSystemClassName)
+    Integer createElevatorSimulation(Integer elevatorCount, Integer maxFloors, Integer delayMs, String elevatorSystemClassName)
             throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException,
             IllegalAccessException;
 
