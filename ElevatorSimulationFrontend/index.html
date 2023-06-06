@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/elevator.css">
-    <script src="script/simulation.js" type="module" defer></script>
+    <script src="script/core.js" type="module" defer></script>
 
 </head>
 <body>
@@ -20,7 +20,7 @@
         <label for="simulation-id">Simulation ID</label>
         <select name="simulation-id" id="simulation-id">
             <option value="-1">None</option>
-            <!-- JS generates code here -->
+            <!-- JS generates the option code here -->
         </select>
     </div>
     <div class="centered filed">
@@ -32,10 +32,49 @@
 </nav>
 
 <section>
-    <div class="centered full">
-
+    <div id="main-elevator-container" class="centered elevator-container">
+        <!-- JS generates the elevator code here -->
     </div>
 </section>
+
+<section>
+    <div id="form-div" class="full-screen hidden">
+        <form>
+            <div>
+                <label for="input-elevator-count">Elevator count</label>
+                <input id="input-elevator-count" type="number" min="1" max="16" step="1" value="2">
+            </div>
+
+            <div>
+                <label for="input-delay-ms">Delay in ms</label>
+                <input id="input-delay-ms" type="number" min="0" step="1000" value="5000">
+            </div>
+
+            <div>
+                <label for="input-max-floors">Max floors</label>
+                <input id="input-max-floors" type="number" min="1" max="500" step="1" value="10">
+            </div>
+
+            <div>
+                <label for="select-system-name">System name</label>
+                <select name="system-name" id="select-system-name">
+                    <option selected value="app.simulation.elevator.system.SCANAlgorithmElevatorSystem">SCAN Algorithm</option>
+                </select>
+            </div>
+            
+            <div>
+                <input id="form-submit" type="submit" value="Create simulation">
+            </div>
+        </form>
+    </div>
+</section>
+
+<div id="error-div" class="full-screen hidden error">
+    <div>
+        <p>The exception message</p>
+        <button>Got it</button>
+    </div>
+</div>
 
 </body>
 </html>
