@@ -1,11 +1,11 @@
-:root{
+:root {
     --main-color-light: #a3b18a;
     --main-color-dark: #3a5a40;
     --font-color: #000;
 }
 
 html,
-body{
+body {
     font-family: 'Inter', 'Courier New', 'Serif', serif;
     font-weight: normal;
     color: var(--font-color);
@@ -14,7 +14,7 @@ body{
     background-color: #fff;
 }
 
-button, select, input{
+button, select, input {
     box-sizing: border-box;
     background-color: #fff;
     outline: none;
@@ -28,16 +28,16 @@ button, select, input{
     transition: .15s all ease-in-out;
 }
 
-button{
+button {
     padding: 10px 20px;
     width: 100%;
 }
 
-button:hover, select:hover, input:hover{
+button:hover, select:hover, input:hover {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
-.form{
+.form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -47,7 +47,7 @@ button:hover, select:hover, input:hover{
     border-radius: 4px;
 }
 
-.form > div{
+.form > div {
     margin: 5px 0;
     display: flex;
     justify-content: space-between;
@@ -55,27 +55,27 @@ button:hover, select:hover, input:hover{
     width: 100%;
 }
 
-.form input, .form select{
+.form input, .form select {
     width: 150px;
     margin-left: 10px;
 }
 
-.form button{
+.form button {
     width: 100%;
     margin: 0;
 }
 
-.centered{
+.centered {
     margin: auto;
     text-align: center;
 }
 
-.filed{
+.filed {
     width: 200px;
     margin: 10px auto;
 }
 
-.full-screen{
+.full-screen {
     position: absolute;
     top: 0;
     left: 0;
@@ -89,13 +89,13 @@ button:hover, select:hover, input:hover{
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-.hidden{
+.hidden {
     pointer-events: none;
     opacity: 0;
     transform: translateY(-100%);
 }
 
-.error{
+.error {
     background-color: #fff;
     padding: 50px;
     border-radius: 4px;

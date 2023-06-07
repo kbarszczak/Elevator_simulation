@@ -1,4 +1,4 @@
-.elevator-container{
+.elevator-container {
     border: 1px dashed #000;
     min-height: 200px;
     min-width: 200px;
@@ -13,14 +13,14 @@
     margin: 5px 0;
 }
 
-.elevator-container button{
+.elevator-container button {
     margin: 2px 0;
     padding: 5px;
     width: 100%;
     height: auto;
 }
 
-.shaft{
+.shaft {
     position: relative;
     width: 80px;
     min-height: 120px;
@@ -30,7 +30,7 @@
     border: 1px solid #000;
 }
 
-.floor{
+.floor {
     position: absolute;
     bottom: calc(120px * 0 + 10px); /* default position is the ground floor */
     box-sizing: border-box;
@@ -46,20 +46,20 @@
     transition: .15s all ease-in-out;
 }
 
-.floor:hover{
+.floor:hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
-.elevator{
+.elevator {
     background-color: silver;
 }
 
-.elevator:hover .elevator-panel{
+.elevator:hover .elevator-panel {
     opacity: 1;
     pointer-events: auto;
 }
 
-.elevator-panel{
+.elevator-panel {
     position: absolute;
     top: 0;
     left: 0;
@@ -74,14 +74,14 @@
     transition: .15s all ease-in-out;
 }
 
-.elevator-buttons{
+.elevator-buttons {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 
-.elevator-buttons button{
+.elevator-buttons button {
     width: auto;
     height: auto;
     padding: 2px;
@@ -89,6 +89,6 @@
     margin: 2px;
 }
 
-.opened{
+.opened {
     background-color: green;
 }

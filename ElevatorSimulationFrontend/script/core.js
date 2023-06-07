@@ -28,21 +28,36 @@ deleteSimulationButton.addEventListener('click', deleteSimulation)
 errorButton.addEventListener('click', hideError)
 
 // event functions
+/**
+ * The function sets up the page, loads all the components and sets the interval to update the page content every second
+ */
 function preparePage() {
     update()
     setInterval(update, 1000)
 }
 
+/**
+ * The function handles all the page update. It updates all the available simulations, current simulation model and
+ * the simulation view
+ * @returns {Promise<void>} this promise can be ignored
+ */
 async function update() {
     await updateSimulationIds(parseInt(simulationIdSelect.value))
     await updateModel()
     await updateView()
 }
 
+/**
+ * The function pops out the simulation creation form
+ */
 function showCreateSimulationForm() {
     show(createSimulationDiv)
 }
 
+/**
+ * The function deletes currently selected simulation from the server. Its sets the 'None' value
+ * as a currently displayed simulation. If the request is not successful then proper message pops out on the screen
+ */
 function deleteSimulation() {
     let id = parseInt(simulationIdSelect.value)
     if (id !== -1) {
@@ -66,6 +81,11 @@ function deleteSimulation() {
 
 }
 
+/**
+ * The function creates a new simulation on the server. It will verify each form parameter.
+ * In case of any error proper message pops out
+ * @param event that caused calling this function
+ */
 function createSimulation(event) {
     event.preventDefault()
 
@@ -102,10 +122,17 @@ function createSimulation(event) {
         })
 }
 
+/**
+ * The method hides the error box
+ */
 function hideError() {
     hide(errorDiv)
 }
 
+/**
+ * The method sends the pickup request to the server
+ * @param event the button that caused this event
+ */
 function servePickupRequest(event) {
     let idSplit = event.target.id.split("_")
     let direction = idSplit[0].toUpperCase()
@@ -121,6 +148,10 @@ function servePickupRequest(event) {
     })
 }
 
+/**
+ * The method sends the elevate request to the server
+ * @param event the button that caused this event
+ */
 function serveElevateRequest(event) {
     let idSplit = event.target.id.split("_")
     let simulationId = parseInt(idSplit[1])
@@ -132,13 +163,19 @@ function serveElevateRequest(event) {
         {
             method: "PUT"
         }).then(async response => {
-            if (!response.ok) throw new Error(await response.text())
-        }).catch(error => {
-            showMessage(error)
-        })
+        if (!response.ok) throw new Error(await response.text())
+    }).catch(error => {
+        showMessage(error)
+    })
 }
 
 // other functions
+/**
+ * The function loads simulation ids and presents them in the proper combobox
+ * @param selectedId the id of the simulation that will be selected after completion. If the id does not exist after execution
+ * of this function then the None simulation is set
+ * @returns {Promise<void>} this may be ignored
+ */
 async function updateSimulationIds(selectedId) {
     await fetch(baseUrl)
         .then(promise => {
@@ -170,6 +207,10 @@ async function updateSimulationIds(selectedId) {
         })
 }
 
+/**
+ * The function synchronizes current simulation model with the one existing on the server
+ * @returns {Promise<void>} this may be ignored
+ */
 async function updateModel() {
     let id = parseInt(simulationIdSelect.value)
     if (id === -1) {
@@ -196,6 +237,10 @@ async function updateModel() {
         })
 }
 
+/**
+ * The function is responsible for updating the model view. If the model view is null then the view is empty.
+ * If the current view shows the same simulation its state will be updated otherwise, the simulation from the model will be setup
+ */
 function updateView() {
     if (viewModel === null) {
         deleteChildren(elevatorContainerDiv)
@@ -298,12 +343,20 @@ function updateView() {
     }
 }
 
+/**
+ * The function deletes all the children of a given node
+ * @param node to delete the children from
+ */
 function deleteChildren(node) {
     while (node.firstChild) {
         node.removeChild(node.firstChild)
     }
 }
 
+/**
+ * The function displays error messages in the full screen window
+ * @param message this may be a single string or an array. In case of array each element will be put to a separate paragraph
+ */
 function showMessage(message) {
     if (!Array.isArray(message)) message = [message]
 
@@ -319,12 +372,20 @@ function showMessage(message) {
     show(errorDiv)
 }
 
+/**
+ * The function hides selected node
+ * @param node to be hidden
+ */
 function hide(node) {
     if (!node.classList.contains('hidden')) {
         node.classList.add('hidden')
     }
 }
 
+/**
+ * The function shows selected node
+ * @param node to be shown
+ */
 function show(node) {
     if (node.classList.contains('hidden')) {
         node.classList.remove('hidden')
