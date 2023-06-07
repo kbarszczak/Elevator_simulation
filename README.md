@@ -42,10 +42,10 @@ git clone https://github.com/kbarszczak/Elevator_simulation .
 ```
 or use the git .bundle
 ```
-mkdir simulation
-cd simulation
-// paste kamil_barszczak.bundle file to the created directory
+// kamil_barszczak.bundle has to be in the same directory
 git clone kamil_barszczak.bundle
+cd kamil_barszczak
+git checkout main
 ```
 2. The next step is to build jar by executing the following commands
 ```
