@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 
 /**
- *
+ * The class implements a Simulation interface and simulates the movement of the elevator
  */
 @Setter
 @Getter
@@ -26,8 +26,9 @@ public class ElevatorSimulation implements Simulation {
     private ElevatorSystem system;
 
     /**
-     * @param system
-     * @param elevators
+     * The constructor sets up the ElevatorSimulation
+     * @param system is the algorithm that is responsible for arranging the movement of the elevators
+     * @param elevators that are used by the simulation
      */
     public ElevatorSimulation(ElevatorSystem system, List<Elevator> elevators, int floors) {
         this.semaphore = new Semaphore(1);
@@ -37,7 +38,9 @@ public class ElevatorSimulation implements Simulation {
     }
 
     /**
-     * @param request
+     * The method registers elevator requests. This method is a blocking method. Its blocks the thread
+     * until the step method is released
+     * @param request that will be registered. Either PickupRequest or ElevateRequest
      */
     public int register(Request request) {
         int result = 0;
@@ -58,7 +61,8 @@ public class ElevatorSimulation implements Simulation {
     }
 
     /**
-     *
+     * The method executes one step of the simulation. Same as the register method this method is also blocking.
+     * It blocks the thread until the register method is released
      */
     @Override
     public void step() {

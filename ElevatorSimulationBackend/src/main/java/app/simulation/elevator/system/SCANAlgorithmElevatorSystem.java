@@ -12,15 +12,17 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- *
+ * The class implements SCAN algorithm to arrange the elevators traffic
  */
 @ToString
 public class SCANAlgorithmElevatorSystem implements ElevatorSystem {
 
     /**
-     * @param elevators
-     * @param request
-     * @return
+     * The method registers a given request for one of the specified elevators modifying its inside requests queue
+     * The algorithm used for registration is called SCAN algorithm (more in readme)
+     * @param elevators where the request will be registered
+     * @param request that will be registered
+     * @return the id of an elevator that was used to register the request
      */
     @Override
     public int register(List<Elevator> elevators, Request request) {
@@ -76,9 +78,11 @@ public class SCANAlgorithmElevatorSystem implements ElevatorSystem {
     }
 
     /**
-     * @param elevator
-     * @param pickup
-     * @return
+     * The method calculates the distance from the current elevator floor to the destination floor from the request.
+     * Calculated distance takes the direction into account
+     * @param elevator used to calculate the distance
+     * @param pickup the request that is used to calculate the distance
+     * @return the distance from current elevator floor to the destination floor from the request.
      */
     public static int calculateDistance(Elevator elevator, PickupRequest pickup) {
         // get the current direction of the elevator
@@ -99,9 +103,10 @@ public class SCANAlgorithmElevatorSystem implements ElevatorSystem {
     }
 
     /**
-     * @param elevators
-     * @param pickup
-     * @return
+     * The method picks the elevator with the least distance to the request destination floor
+     * @param elevators used in the calculations
+     * @param pickup the request for which the elevator is picked
+     * @return the elevator object that has the least distance to the given request
      */
     public static Elevator pickElevator(List<Elevator> elevators, PickupRequest pickup) {
         // variables for best elevator
@@ -125,8 +130,11 @@ public class SCANAlgorithmElevatorSystem implements ElevatorSystem {
     }
 
     /**
-     * @param elevator
-     * @param request
+     * The method is responsible for appending a given request to the given elevator.
+     * The request is appended accordingly to the following SCAN algorithm rule: Go as long as possible in the
+     * current direction. If there are no left requests in the current direction then change the direction and repeat the process
+     * @param elevator used to append the request
+     * @param request that will be appended
      */
     public static void appendRequest(Elevator elevator, Request request) {
         // return requests that have NOT_IN_MOVE direction (fe. from floor 5 to 5 etc.)

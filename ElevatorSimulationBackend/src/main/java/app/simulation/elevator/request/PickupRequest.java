@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- *
+ * The request class that can be used when registering pickup requests from a specified floor
  */
 @Getter
 @EqualsAndHashCode(callSuper = true)
@@ -16,8 +16,8 @@ public class PickupRequest extends Request {
     private final Direction direction;
 
     /**
-     * @param destination
-     * @param direction
+     * @param destination the floor from which the elevator should pick up one
+     * @param direction the desired direction of one's movement
      */
     public PickupRequest(int destination, Direction direction) {
         super(destination);

@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *
+ * The class that models elevator
  */
 @Data
 public class Elevator {
@@ -20,7 +20,8 @@ public class Elevator {
     private int currentFloor;
 
     /**
-     *
+     * The constructor sets up the object with current floor set to 0, empty request queue and the id
+     * set to the unique value
      */
     public Elevator() {
         this.requests = new LinkedList<>();
@@ -29,7 +30,8 @@ public class Elevator {
     }
 
     /**
-     * @return
+     * The method returns the floor where the elevator is going to stop
+     * @return the next elevator stop (for request queue 1 -> 5 -> 9 -> 0 the method will return 1)
      */
     public int getDestinationFloor() {
         for (Request request : requests) {
@@ -39,6 +41,11 @@ public class Elevator {
         return currentFloor;
     }
 
+    /**
+     * The method returns the last floor from the request queue in a given direction
+     * @param direction of seeking the floor
+     * @return the last floor in a given direction (for request queue 1 -> 5 -> 9 -> 0 and direction UP the method will return 9)
+     */
     public int getLastFloorInDirection(Direction direction) {
         return switch (direction) {
             case DOWN -> requests.stream().mapToInt(Request::getDestination).min().orElseThrow();
@@ -48,14 +55,14 @@ public class Elevator {
     }
 
     /**
-     * @return
+     * @return the last floor in current elevator direction
      */
     public int getLastFloorInCurrentDirection() {
         return getLastFloorInDirection(getDirection());
     }
 
     /**
-     * @return
+     * @return the enum value that describes the elevator movement
      */
     public Direction getDirection() {
         return switch ((int) Math.signum(currentFloor - getDestinationFloor())) {
