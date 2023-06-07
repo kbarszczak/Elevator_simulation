@@ -106,22 +106,36 @@ function hideError() {
     hide(errorDiv)
 }
 
-function servePickupRequest(event){
+function servePickupRequest(event) {
     let idSplit = event.target.id.split("_")
     let direction = idSplit[0].toUpperCase()
-    let destination = parseInt(idSplit[1])
+    let source = parseInt(idSplit[1])
 
-    // todo: register pickup request
+    fetch(`${baseUrl}${pickupUrlPostfix}/${viewModel.simulationId}?source=${source}&direction=${direction}`,
+        {
+            method: "PUT"
+        }).then(async response => {
+        if (!response.ok) throw new Error(await response.text())
+    }).catch(error => {
+        showMessage(error)
+    })
 }
 
-function serveElevateRequest(event){
+function serveElevateRequest(event) {
     let idSplit = event.target.id.split("_")
     let simulationId = parseInt(idSplit[1])
     let elevatorId = parseInt(idSplit[3])
     let destination = parseInt(idSplit[5])
 
-    // todo: send the request
-
+    let source = viewModel.elevators.filter(x => x.elevatorId === elevatorId)[0].currentFloor
+    fetch(`${baseUrl}${elevateUrlPostfix}/${simulationId}?source=${source}&destination=${destination}&elevator_id=${elevatorId}`,
+        {
+            method: "PUT"
+        }).then(async response => {
+            if (!response.ok) throw new Error(await response.text())
+        }).catch(error => {
+            showMessage(error)
+        })
 }
 
 // other functions
@@ -189,8 +203,8 @@ function updateView() {
     }
 
     // update the simulation state
-    if(elevatorContainerDiv.firstElementChild !== null
-        && parseInt(elevatorContainerDiv.firstElementChild.id.split("_")[1]) === viewModel.simulationId){
+    if (elevatorContainerDiv.firstElementChild !== null
+        && parseInt(elevatorContainerDiv.firstElementChild.id.split("_")[1]) === viewModel.simulationId) {
         viewModel.elevators.forEach(x => {
             let elevator = document.querySelector(`#simulation_${viewModel.simulationId}_elevator_${x.elevatorId}`)
             let elevatorChild = elevator.firstElementChild
@@ -198,13 +212,13 @@ function updateView() {
             let elevatorPs = [...elevatorChild.children]
             elevatorPs[0].innerHTML = `c: ${x.currentFloor}`
             elevatorPs[1].innerHTML = `d: ${x.destinationFloor}`
-            if(x.isOpened) {
-                if(!elevatorChild.classList.contains("opened")) elevatorChild.classList.add("opened")
-            } else{
-                if(elevatorChild.classList.contains("opened")) elevatorChild.classList.remove("opened")
+            if (x.isOpened) {
+                if (!elevatorChild.classList.contains("opened")) elevatorChild.classList.add("opened")
+            } else {
+                if (elevatorChild.classList.contains("opened")) elevatorChild.classList.remove("opened")
             }
         })
-    } else{ // set up the simulation
+    } else { // set up the simulation
         // delete all current children
         deleteChildren(elevatorContainerDiv)
 
@@ -284,7 +298,7 @@ function updateView() {
     }
 }
 
-function deleteChildren(node){
+function deleteChildren(node) {
     while (node.firstChild) {
         node.removeChild(node.firstChild)
     }
