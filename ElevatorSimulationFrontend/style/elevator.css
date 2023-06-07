@@ -1,11 +1,94 @@
-:root{
-
+.elevator-container{
+    border: 1px dashed #000;
+    min-height: 200px;
+    min-width: 200px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
-.elevator-container{
+.elevator-container p {
+    margin: 5px 0;
+}
 
+.elevator-container button{
+    margin: 2px 0;
+    padding: 5px;
+    width: 100%;
+    height: auto;
+}
+
+.shaft{
+    position: relative;
+    width: 80px;
+    min-height: 120px;
+    height: calc(120px * 10); /* default height is 10 floors*/
+    margin: 10px 20px;
+    padding: 10px;
+    border: 1px solid #000;
+}
+
+.floor{
+    position: absolute;
+    bottom: calc(120px * 0 + 10px); /* default position is the ground floor */
+    box-sizing: border-box;
+    width: 80px;
+    height: 120px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    border: 1px solid #000;
+    transition: .15s all ease-in-out;
+}
+
+.floor:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
 .elevator{
+    background-color: silver;
+}
 
+.elevator:hover .elevator-panel{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.elevator-panel{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: .15s all ease-in-out;
+}
+
+.elevator-buttons{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.elevator-buttons button{
+    width: auto;
+    height: auto;
+    padding: 2px;
+    font-size: 10px;
+    margin: 2px;
+}
+
+.opened{
+    background-color: green;
 }

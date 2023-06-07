@@ -1,5 +1,3 @@
-import ElevatorDiv from './elevator-div.js'
-
 export default class ViewModel{
 
     constructor(simulationId, floors, elevators) {
