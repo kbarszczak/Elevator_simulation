@@ -37,7 +37,7 @@ button:hover, select:hover, input:hover{
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
-form{
+.form{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -47,7 +47,7 @@ form{
     border-radius: 4px;
 }
 
-form > div{
+.form > div{
     margin: 5px 0;
     display: flex;
     justify-content: space-between;
@@ -55,12 +55,12 @@ form > div{
     width: 100%;
 }
 
-form input, form select{
+.form input, .form select{
     width: 150px;
     margin-left: 10px;
 }
 
-form input[type=submit]{
+.form button{
     width: 100%;
     margin: 0;
 }
@@ -96,5 +96,7 @@ form input[type=submit]{
 }
 
 .error{
-
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 4px;
 }

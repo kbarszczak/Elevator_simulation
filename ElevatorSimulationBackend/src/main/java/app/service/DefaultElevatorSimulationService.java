@@ -70,6 +70,7 @@ public class DefaultElevatorSimulationService implements ElevatorSimulationServi
 
         return new ElevatorSimulationDto(
                 id,
+                simulation.getFloors(),
                 elevators
         );
     }
